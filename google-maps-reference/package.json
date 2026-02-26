@@ -1,0 +1,37 @@
+{
+  "name": "plasmic-google-maps",
+  "version": "1.1.4",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prsc-nl/plasmic-google-maps.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "bun run build"
+  },
+  "devDependencies": {
+    "@plasmicapp/loader-react": "^1.0.413",
+    "@types/bun": "latest",
+    "@types/react": "^18"
+  },
+  "peerDependencies": {
+    "react": "^18",
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@vis.gl/react-google-maps": "^1.7.1"
+  }
+}

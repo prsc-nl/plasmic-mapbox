@@ -1,0 +1,38 @@
+{
+  "name": "plasmic-mapbox",
+  "version": "1.0.1",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/prsc-nl/plasmic-mapbox.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "bun run build"
+  },
+  "devDependencies": {
+    "@plasmicapp/loader-react": "^1.0.413",
+    "@types/bun": "latest",
+    "@types/react": "^18"
+  },
+  "peerDependencies": {
+    "react": "^18",
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "mapbox-gl": "^3.11.0",
+    "react-map-gl": "^7.1.9"
+  }
+}
