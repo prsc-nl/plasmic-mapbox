@@ -11,6 +11,7 @@
       "devDependencies": {
         "@plasmicapp/loader-react": "^1.0.413",
         "@types/bun": "latest",
+        "@types/mapbox__point-geometry": "^1.0.87",
         "@types/react": "^18",
       },
       "peerDependencies": {

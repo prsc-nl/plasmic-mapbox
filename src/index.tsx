@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 import type React from "react";
-import Map, { Marker } from "react-map-gl/mapbox";
+import Map, { Marker, NavigationControl } from "react-map-gl/mapbox";
 import type { PlasmicComponentLoader } from "@plasmicapp/loader-react";
 
 const MAPBOX_CSS = "https://api.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.css";
@@ -156,6 +156,7 @@ export const MapboxMap: React.FC<MapboxMapProps> = ({
         attributionControl={showControls}
         scrollZoom={scrollZoom}
       >
+        {showControls && <NavigationControl />}
         {children}
       </Map>
     </div>
