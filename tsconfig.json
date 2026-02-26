@@ -21,6 +21,7 @@
     // Best practices
     "strict": true,
     "skipLibCheck": true,
+    "types": ["react", "bun"],
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,

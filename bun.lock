@@ -5,13 +5,14 @@
     "": {
       "name": "plasmic-mapbox",
       "dependencies": {
+        "@mapbox/point-geometry": "^1.1.0",
+        "@types/mapbox__point-geometry": "^1.0.87",
         "mapbox-gl": "^3.19.0",
         "react-map-gl": "^8.1.0",
       },
       "devDependencies": {
         "@plasmicapp/loader-react": "^1.0.413",
         "@types/bun": "latest",
-        "@types/mapbox__point-geometry": "^1.0.87",
         "@types/react": "^18",
       },
       "peerDependencies": {
