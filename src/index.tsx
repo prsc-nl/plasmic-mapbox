@@ -1,7 +1,6 @@
 import { useState, useCallback, useMemo, useEffect } from "react";
 import type React from "react";
-import MapGL, { Marker } from "react-map-gl";
-import type { MapStyle } from "react-map-gl";
+import Map, { Marker } from "react-map-gl/mapbox";
 import type { PlasmicComponentLoader } from "@plasmicapp/loader-react";
 
 const MAPBOX_CSS = "https://api.mapbox.com/mapbox-gl-js/v3.11.0/mapbox-gl.css";
@@ -38,7 +37,10 @@ export const MapBubble: React.FC<MapBubbleProps> = ({
   className,
 }) => {
   return (
-    <div className={className} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+    <div
+      className={className}
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <div
         style={{
           background,
@@ -81,7 +83,7 @@ export const MapPin: React.FC<MapPinProps> = ({
   className,
 }) => {
   return (
-    <Marker longitude={lng} latitude={lat} anchor="bottom">
+    <Marker longitude={lng} latitude={lat}>
       <div className={className}>{children}</div>
     </Marker>
   );
@@ -104,7 +106,7 @@ export interface MapboxMapProps {
 }
 
 export const MapboxMap: React.FC<MapboxMapProps> = ({
-  accessToken,
+  accessToken: accessTokenProp,
   styleType = "link",
   mapStyle = "mapbox://styles/mapbox/streets-v12",
   customStyle,
@@ -116,16 +118,21 @@ export const MapboxMap: React.FC<MapboxMapProps> = ({
   scrollZoom = true,
   className,
 }) => {
+  const accessToken =
+    process.env.NEXT_PUBLIC_MAPBOX_TOKEN ||
+    process.env.MAPBOX_TOKEN ||
+    accessTokenProp ||
+    "";
   useMapboxCSS();
-  const resolvedStyle = useMemo<string | MapStyle>(() => {
+  const resolvedStyle = useMemo(() => {
     if (styleType === "custom" && customStyle) {
       try {
-        return JSON.parse(customStyle) as MapStyle;
+        return JSON.parse(customStyle);
       } catch {
-        return mapStyle ?? "mapbox://styles/mapbox/streets-v12";
+        return mapStyle;
       }
     }
-    return mapStyle ?? "mapbox://styles/mapbox/streets-v12";
+    return mapStyle;
   }, [styleType, mapStyle, customStyle]);
   const [viewState, setViewState] = useState({
     longitude: centerLng,
@@ -139,8 +146,8 @@ export const MapboxMap: React.FC<MapboxMapProps> = ({
   );
 
   return (
-    <div className={className} style={{ width: "100%", height: "100%" }}>
-      <MapGL
+    <div className={className}>
+      <Map
         {...viewState}
         onMove={onMove}
         mapboxAccessToken={accessToken}
@@ -150,7 +157,7 @@ export const MapboxMap: React.FC<MapboxMapProps> = ({
         scrollZoom={scrollZoom}
       >
         {children}
-      </MapGL>
+      </Map>
     </div>
   );
 };
@@ -253,7 +260,8 @@ export function registerMapboxMap(loader: PlasmicComponentLoader) {
       mapStyle: {
         type: "string",
         displayName: "Style URL",
-        description: "Mapbox style URL (e.g. mapbox://styles/mapbox/streets-v12)",
+        description:
+          "Mapbox style URL (e.g. mapbox://styles/mapbox/streets-v12)",
         defaultValue: "mapbox://styles/mapbox/streets-v12",
         hidden: (props: MapboxMapProps) => props.styleType === "custom",
       },

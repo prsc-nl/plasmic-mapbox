@@ -21,7 +21,7 @@ A full-featured Mapbox GL map container with configurable center, zoom, and styl
 
 | Prop           | Type      | Default                                  | Description                            |
 | -------------- | --------- | ---------------------------------------- | -------------------------------------- |
-| `accessToken`  | `string`  | —                                        | Mapbox access token (required)         |
+| `accessToken`  | `string`  | env var                                  | Mapbox access token (see below)        |
 | `mapStyle`     | `string`  | `mapbox://styles/mapbox/streets-v12`     | Mapbox style URL                       |
 | `centerLat`    | `number`  | `51.9225`                                | Latitude of the map center             |
 | `centerLng`    | `number`  | `4.47917`                                | Longitude of the map center            |
@@ -76,9 +76,21 @@ function App() {
 }
 ```
 
-## Prerequisites
+## Access token
 
-- A [Mapbox access token](https://docs.mapbox.com/help/getting-started/access-tokens/)
+The component looks for a Mapbox token in this order:
+
+1. `NEXT_PUBLIC_MAPBOX_TOKEN` environment variable
+2. `MAPBOX_TOKEN` environment variable
+3. The `accessToken` prop
+
+Set the token in your `.env` file to override any prop value:
+
+```env
+NEXT_PUBLIC_MAPBOX_TOKEN=pk.your_token_here
+```
+
+Get your token from the [Mapbox access tokens page](https://docs.mapbox.com/help/getting-started/access-tokens/).
 
 ## License
 

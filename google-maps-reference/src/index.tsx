@@ -22,7 +22,10 @@ export const MapBubble: React.FC<MapBubbleProps> = ({
   className,
 }) => {
   return (
-    <div className={className} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+    <div
+      className={className}
+      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <div
         style={{
           background,
